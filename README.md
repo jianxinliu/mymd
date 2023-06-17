@@ -33,7 +33,5 @@ mymd -> my markdown
 用法：
 
 ```js
-import {compileMd} from 'mymd';
-
 const html = compileMd(draft)
 ```
