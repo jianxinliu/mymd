@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mymd preview</title>
+  </head>
+  <body>
+    <div class="c">
+      <div class="e">
+        <p class="label">mymd 功能一览：</p>
+        <textarea
+          class="template"
+          type="textarea"
+          :rows="15"
+          onblur="useMdCompiler()"
+          oninput="useMdCompiler()"
+        ></textarea>
+      </div>
+      <div class="p">
+        <p class="label">预览：</p>
+        <div class="realTime" v-html="realTimeRet"></div>
+      </div>
+    </div>
+
+    <script>
+        const template = `# #darkviolet{一级标题}
+这是一个#lightgrey{** 重*_斜体_*点**}，次*重点*， #lightseagreen{颜色名}
+
+*斜 **重点** 体*
+
+## 二级标题
+有序列表
+1. **AA**
+2. bb
+3. #cyan{cc}
+
+无序列表
+- 1
+- *2*
+- 3
+
+###### 六级标题 (最小)
+正常文字
+##95d475{16 进制 RBG 颜色用法}
+#rgba(255,0,0,0.2){rgba 颜色用法}
+
+`;
+    </script>
+    <script src="./mymd.js"></script>
+    <script>
+
+        const draftEle = document.querySelector('.template')
+        draftEle.value = template
+
+        function useMdCompiler() {
+            const html = compileMd(draftEle.value)
+            document.querySelector('.realTime').innerHTML = html
+        }
+
+        useMdCompiler()
+        
+    </script>
+
+    <style>
+      .label {
+        margin-left: 10px;
+        font-weight: bold;
+        padding: 5px;
+      }
+
+      .realTime,
+      .template {
+        margin-left: 10px;
+        padding: 20px;
+        display: inline-block;
+        width: 300px;
+        border: 2px double darkviolet;
+        border-radius: 5px;
+        height: calc(100vh - 150px);
+        overflow-y: scroll;
+      }
+
+      .template {
+        border: 1px solid lightseagreen;
+      }
+
+      .c {
+        display: flex;
+      }
+      .p {
+        display: inline-block;
+      }
+      .e {
+        display: inline-block;
+      }
+    </style>
+  </body>
+</html>
