@@ -2,11 +2,14 @@
 
 mymd -> my markdown
 
-坚持编译简单的 markdown 语法成 HTML
+支持编译简单的 markdown 语法成 HTML
 
 todo: 
 
 - [ ] table
+- [ ] code block
+- [ ] 样式支持自定义
+- [ ] 
 
 ## 支持的语法一览
 
