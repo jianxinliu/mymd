@@ -10,7 +10,15 @@ mymd -> my markdown
 # #darkviolet{一级标题}
 这是一个#lightgrey{** 重*_斜体_*点**}，次*重点*， #lightseagreen{颜色名}
 
-*斜 **重点** 体*
+*斜 **重点** 体* [url](https://www.baidu.com)
+
+> 引用**的内容**
+> 
+> 引用#red{aaa}
+
+![image](https://cdn.freebiesupply.com/logos/large/2x/vue-9-logo-png-transparent.png)(w=120 h=200)
+
+`tag`
 
 - [ ] AA
 - [X] BB
