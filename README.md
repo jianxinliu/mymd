@@ -4,6 +4,10 @@ mymd -> my markdown
 
 坚持编译简单的 markdown 语法成 HTML
 
+todo: 
+
+- [ ] table
+
 ## 支持的语法一览
 
 ```text
