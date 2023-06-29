@@ -1,0 +1,24 @@
+{
+  "name": "txt2md",
+  "version": "0.0.2",
+  "description": "my markdown parser",
+  "main": "mymd.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish": "npm publish --registry https://registry.npm.taobao.org/ && npm publish --registry https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jianxinliu/mymd.git"
+  },
+  "keywords": [
+    "markdown",
+    "javascript"
+  ],
+  "author": "jianxinliu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jianxinliu/mymd/issues"
+  },
+  "homepage": "https://github.com/jianxinliu/mymd#readme"
+}
