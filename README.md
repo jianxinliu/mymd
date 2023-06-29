@@ -6,6 +6,8 @@ mymd -> my markdown
 
 todo: 
 
+- [ ] 解析成 ast
+- [ ] 样式采用 class
 - [ ] table
 - [ ] code block
 - [ ] 样式支持自定义

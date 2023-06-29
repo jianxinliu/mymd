@@ -22,7 +22,7 @@ const MAX_TITLE = config.maxTitle;
 const BASE_TITLE_FONT_SIZE = config.baseTitleFontSize;
 const STEP_FONT_SIZE = config.stepFontSize;
 
-export function compileMd(text = "") {
+function compileMd(text = "") {
   const rows = text.split("\n");
   const listFn = (i, reg) => list(rows, i, reg);
   let rowsRet = [];

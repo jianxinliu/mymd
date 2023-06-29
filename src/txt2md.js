@@ -1,3 +1,5 @@
+const config = require('./config.json')
+
 const RegExps = {
   isTitle: /#+\s(.*?)$/, // `# title`
   isColor: /#(.*?)\{(.*?)\}/g, // `#red{content}` `#ccc{content}` `#rgba(255,255,0,0.5){content}`
@@ -11,9 +13,9 @@ const RegExps = {
   isTag: /`(.*?)`/g, // ``tag``
   isQuote: /^>\s(.*?)$/, // `> quote`
 };
-const MAX_TITLE = 6;
-const BASE_TITLE_FONT_SIZE = 5;
-const STEP_FONT_SIZE = 3;
+const MAX_TITLE = config.maxTitle;
+const BASE_TITLE_FONT_SIZE = config.baseTitleFontSize;
+const STEP_FONT_SIZE = config.stepFontSize;
 
 function compileMd(text = "") {
   const rows = text.split("\n");
