@@ -15,7 +15,7 @@ const MAX_TITLE = 6;
 const BASE_TITLE_FONT_SIZE = 5;
 const STEP_FONT_SIZE = 3;
 
-function compileMd(text = "") {
+export function compileMd(text = "") {
   const rows = text.split("\n");
   const listFn = (i, reg) => list(rows, i, reg);
   let rowsRet = [];
@@ -180,11 +180,13 @@ function image(input = "") {
     alt = match[1] || " ";
     src = match[2];
     const groups = match.groups;
-    if (groups.w) {
-      width = groups.w.split("=")[1] - 0;
-    }
-    if (groups.h) {
-      height = groups.h.split("=")[1] - 0;
+    if (groups) {
+      if (groups.w) {
+        width = groups.w.split("=")[1] - 0;
+      }
+      if (groups.h) {
+        height = groups.h.split("=")[1] - 0;
+      }
     }
   }
   return input.replace(
