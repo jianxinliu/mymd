@@ -53,3 +53,13 @@ todo:
 ```js
 const html = compileMd(draft)
 ```
+
+## 在 ts 中使用
+
+增加类型定义文件 txt2md.d.ts
+
+```ts
+declare module 'txt2md'
+
+declare function compileMd(text:string):string
+```
