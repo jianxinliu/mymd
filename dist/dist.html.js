@@ -9,12 +9,15 @@ const RegExps = {
   isColor: /#(.*?)\{(.*?)\}/g, // `#red{content}` `#ccc{content}` `#rgba(255,255,0,0.5){content}`
   isBold: /\*\*(.+?)\*\*/g, // `**bold**`
   isItalics: /\*(.+?)\*/g, // `*italic*`
+  isDelete: /~(.*?)~/g,    // `~delete~`
+  isUnder: /__(.*?)__/g,   // `__under__`
+  isTag: /`(.*?)`/g, // ``tag``
+
   isOrderList: /^\d\.\s(.*?)$/, // `1. list`
   isUnOrderList: /^\-\s(.*?)$/, // `- un order list`
   isTaskList: /^\-\s\[([\s|X|x])\]\s(.*?)$/, // `- [ ] task`  or `- [X] task`
   isImg: /!\[(.*?)\]\((.*?)\)(\((?<w>w=\d+)?\s?(?<h>h=\d+)?\))?/g, // `![alt](src)(w= h=)`
   isLink: /\[(.*?)\]\((.*?)\)/g, // `[label](url)`
-  isTag: /`(.*?)`/g, // ``tag``
   isQuote: /^>\s(.*?)$/, // `> quote`
   isCodeBlock: /^```(?<lang>.*?)\s?(hl\[(?<hl>.*?)\])?$/, // ```lang hl[3~5,10]
 };
@@ -155,6 +158,8 @@ const simpleRowHandlers = {
   isBold: bold,
   isItalics: italics,
   isColor: color,
+  isDelete: deleteFn,
+  isUnder: underLine
 };
 
 function simpleRow(input = "") {
@@ -217,6 +222,14 @@ function bold(input = "") {
 function italics(input = "") {
   const reg = RegExps.isItalics;
   return input.replace(reg, '<span class="md-italics">$1</span>');
+}
+
+function deleteFn(input = '') {
+  return input.replace(RegExps.isDelete, `<span class="md-delete" style="text-decoration: line-through;">$1</span>`)
+}
+
+function underLine(input = '') {
+  return input.replace(RegExps.isUnder, `<span class="md-under" style="text-decoration: underline;">$1</span>`)
 }
 
 function image(input = "") {

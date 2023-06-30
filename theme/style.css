@@ -55,6 +55,16 @@
     background-color: lightskyblue;
 }
 
+.md-delete {
+    opacity: 0.6;
+    padding: 0px 3px;
+    text-decoration: line-through;
+}
+
+.md-under {
+    text-decoration: underline;
+}
+
 /* 原生标签样式 */
 
 ul {
