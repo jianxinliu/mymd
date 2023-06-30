@@ -17,11 +17,22 @@ todo:
 
 ## 支持的语法一览
 
+（具体效果参看 preview.html）
+
 ```text
 # #darkviolet{一级标题}
 这是一个#lightgrey{** 重*_斜体_*点**}，次*重点*， #lightseagreen{颜色名}
 
 *斜 **重点** 体* [url](https://www.baidu.com)
+
+\```js hl[2~4,6]
+function hello() {
+  console.log('hello')
+  console.log('hello')
+  console.log('hello')
+  console.log('hello')
+}
+\```
 
 > 引用**的内容**
 > 
@@ -51,12 +62,20 @@ todo:
 ##95d475{16 进制 RBG 颜色用法}
 #rgba(255,0,0,0.2){rgba 颜色用法}
 
+
 ```
 
-用法：
+## 用法
+
+```
+npm i --save txt2md
+```
 
 ```js
-const html = compileMd(draft)
+import { compileMd } from 'txt2md'
+import 'txt2md/theme/style.css'
+
+const html = compileMd(txt)
 ```
 
 ## 在 ts 中使用
