@@ -9,8 +9,11 @@ todo:
 - [ ] 解析成 ast
 - [X] 样式采用 class
 - [ ] table
-- [ ] code block
-- [ ] 样式支持自定义
+- [X] code block
+- [ ] code keywords highlight
+- [ ] code block line number
+- [X] 样式支持自定义
+- [ ] TOC table of content
 
 ## 支持的语法一览
 

@@ -12,6 +12,7 @@ const RegExps = {
   isLink: /\[(.*?)\]\((.*?)\)/g, // `[label](url)`
   isTag: /`(.*?)`/g, // ``tag``
   isQuote: /^>\s(.*?)$/, // `> quote`
+  isCodeBlock: /^```(?<lang>.*?)\s?(hl\[(?<hl>.*?)\])?$/, // ```lang hl[3~5,10]
 };
 const MAX_TITLE = config.maxTitle;
 const BASE_TITLE_FONT_SIZE = config.baseTitleFontSize;
@@ -39,6 +40,10 @@ function compileMd(text = "") {
       const { i: index, list } = listFn(i, RegExps.isUnOrderList);
       i = index;
       rowsRet.push(unOrderList(list));
+    } else if (RegExps.isCodeBlock.test(row)) {
+      const ret = quoteBlock(rows, i, RegExps.isCodeBlock);
+      i = ret.i;
+      rowsRet.push(codeBlock(ret.list));
     } else if (RegExps.isQuote.test(row)) {
       const { i: index, list } = listFn(i, RegExps.isQuote);
       i = index;
@@ -59,6 +64,20 @@ function list(rows = [], i, reg) {
   i--;
   return { i, list: liList };
 }
+
+function quoteBlock(rows = [], i, reg) {
+  let liList = [];
+  while (reg.test(rows[i])) {
+    liList.push(rows[i++]);
+    while (!reg.test(rows[i])) {
+      liList.push(rows[i++]);
+    }
+    liList.push(rows[i++]);
+  }
+  return { i, list: liList };
+}
+
+// ============================= //
 
 function taskList(list = []) {
   const ret = list.map((li) => {
@@ -88,6 +107,32 @@ function unOrderList(list = []) {
     return c ? `<li>${simpleRow(c[1])}</li>` : li;
   });
   return `<ul>${ret.join("")}</ul>`;
+}
+
+function codeBlock(list = []) {
+  const { lang, hl } = list[0].match(RegExps.isCodeBlock).groups;
+  let hls = [];
+  if (hl) {
+    hls = hl
+      .split(",")
+      .map((v) => {
+        if (v.indexOf("~") > -1) {
+          const [from, to] = v.split("~");
+          return range(from - 0, to - 0);
+        } else {
+          return v - 0;
+        }
+      })
+      .flat();
+  }
+  const codes = list.slice(1, list.length - 1).map((v, i) => {
+    let classes = "md-code-line";
+    if (hls.includes(i + 1)) {
+      classes += " md-code-line-hl";
+    }
+    return `<div class="${classes}">${v.replace(/\s/g, "&nbsp;")}</div>`;
+  });
+  return `<div class="md-code">${codes.join("\n")}</div>`;
 }
 
 function quote(list = []) {
@@ -204,7 +249,16 @@ function link(input = "") {
   return input.replace(RegExps.isLink, `<a href="$2">${label}</a>`);
 }
 
-
 function tag(input = "") {
   return input.replace(RegExps.isTag, `<span class="md-tag">$1</span>`);
+}
+
+// ======================= utils
+
+function range(from, to) {
+  let ret = [];
+  for (let i = from - 0; i <= to - 0; i++) {
+    ret.push(i);
+  }
+  return ret;
 }
