@@ -1,6 +1,6 @@
 {
   "name": "txt2md",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "my markdown parser",
   "main": "dist/dist.js",
   "scripts": {
