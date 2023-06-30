@@ -216,12 +216,12 @@ function makeSpan(input = "") {
 
 function bold(input = "") {
   const reg = RegExps.isBold;
-  return input.replace(reg, '<span class="md-bold">$1</span>');
+  return input.replace(reg, '<span class="md-bold" style="font-weight: bold;">$1</span>');
 }
 
 function italics(input = "") {
   const reg = RegExps.isItalics;
-  return input.replace(reg, '<span class="md-italics">$1</span>');
+  return input.replace(reg, '<span class="md-italics" style="font-style: italic">$1</span>');
 }
 
 function deleteFn(input = '') {
