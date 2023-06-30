@@ -1,8 +1,7 @@
 const config = {
     "maxTitle": 6,
     "baseTitleFontSize": 5,
-    "stepFontSize": 3,
-    "theme": "" 
+    "stepFontSize": 3
 }
 
 const RegExps = {
@@ -84,9 +83,7 @@ function orderList(list = []) {
     const c = li.match(RegExps.isOrderList);
     return c ? `<li>${simpleRow(c[1])}</li>` : li;
   });
-  return `<ol style="list-style: decimal; margin-left: 0px">${ret.join(
-    ""
-  )}</ol>`;
+  return `<ol>${ret.join("")}</ol>`;
 }
 
 function unOrderList(list = []) {
@@ -94,7 +91,7 @@ function unOrderList(list = []) {
     const c = li.match(RegExps.isUnOrderList);
     return c ? `<li>${simpleRow(c[1])}</li>` : li;
   });
-  return `<ul style="list-style: disc; margin-left: 0px">${ret.join("")}</ul>`;
+  return `<ul>${ret.join("")}</ul>`;
 }
 
 function quote(list = []) {
@@ -104,9 +101,7 @@ function quote(list = []) {
       return c[1] || "";
     })
     .map((v) => `<p>${simpleRow(v)}</p>`);
-  return `<div style="border-left: 4px solid lightgreen; padding-left: 8px">${ret.join(
-    ""
-  )}</div>`;
+  return `<div class="md-quote">${ret.join("")}</div>`;
 }
 
 const simpleRowHandlers = {
@@ -144,11 +139,13 @@ function title(input = "") {
         alert(`暂不支持 ${n} 级标题`);
         throw Error(`暂不支持 ${n} 级标题`);
       }
-      const borderWidth = n == 1 ? 2 : 1;
-      const titleStyle = `font-weight: bold; font-size: ${
+      const titleStyle = `font-size: ${
         (MAX_TITLE - n) * STEP_FONT_SIZE + BASE_TITLE_FONT_SIZE
-      }px; border-bottom: ${borderWidth}px solid black; padding: 0px 0px 2px 2px;margin-bottom: 10px`;
-      return input.replace(reg, `<p style="${titleStyle}">$1</p>`);
+      }px;`;
+      return input.replace(
+        reg,
+        `<p class="md-h${n}" style="${titleStyle}">$1</p>`
+      );
     }
   } else {
     return input;
@@ -164,17 +161,17 @@ function makeSpan(input = "") {
   if (!input) {
     return "";
   }
-  return `<p style="margin: 5px 0px">${input}</p>`;
+  return `<p class="md-p">${input}</p>`;
 }
 
 function bold(input = "") {
   const reg = RegExps.isBold;
-  return input.replace(reg, '<span style="font-weight: bold">$1</span>');
+  return input.replace(reg, '<span class="md-bold">$1</span>');
 }
 
 function italics(input = "") {
   const reg = RegExps.isItalics;
-  return input.replace(reg, '<span style="font-style: italic">$1</span>');
+  return input.replace(reg, '<span class="md-italics">$1</span>');
 }
 
 function image(input = "") {
@@ -211,9 +208,7 @@ function link(input = "") {
   return input.replace(RegExps.isLink, `<a href="$2">${label}</a>`);
 }
 
+
 function tag(input = "") {
-  return input.replace(
-    RegExps.isTag,
-    `<span style="background: lightcyan; border-radius:6px; padding: 3px">$1</span>`
-  );
+  return input.replace(RegExps.isTag, `<span class="md-tag">$1</span>`);
 }
